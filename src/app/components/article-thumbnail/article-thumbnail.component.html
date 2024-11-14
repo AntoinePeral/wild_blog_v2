@@ -1,0 +1,14 @@
+    <div class="article-thumbnail" [ngClass]="{'popular-article':article.likeCount>200}">
+      <div class="article-thumbnail_img-container">
+        <img [src]="article.image" [alt]="article.image" class="article-thumbnail_img">
+        <span class="article-thumbnail_category">{{article.categoryName}}</span>
+      </div>
+      <div class="article-thumbnail_content">
+        <div class="article-thumbnail_content_data">
+          <p class="article-thumbnail_like-count"><span>♥</span> {{article.likeCount}}</p>
+          <p class="article-thumbnail_date">{{article.createdAt | date: 'dd/MM/yyyy'}}</p>
+        </div>
+        <h2><a [routerLink]="['/article', article.id]" class="article-thumbnail_title">{{article.title}}</a></h2>
+        <p class="article-thumbnail_excerpt">{{article.content}}</p>
+      </div>
+    </div>

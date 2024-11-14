@@ -1,0 +1,96 @@
+@import '../../../styles.scss';
+/* Header global */
+header {
+  background-color: #fff; /* Fond blanc pour le header */
+  padding: 10px 20px 20px 20px;
+}
+
+/* Partie supérieure du header */
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+}
+
+/* Logo */
+.header-logo {
+  font-size: 2em;
+  font-weight: bold;
+  color: $orange_dark;
+}
+
+/* Navigation */
+.header-nav {
+  display: flex;
+  align-items: center;
+}
+
+.header-nav a {
+  text-decoration: none;
+  color: $orange_light;
+  margin: 0 15px;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.header-nav a:hover {
+  color: #ff8c00; /* Changement de couleur au survol */
+}
+
+/* Bouton de connexion */
+.header-button {
+  background-color: #FFA500; /* Couleur orange */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.header-button:hover {
+  background-color: #ff8c00; /* Couleur plus foncée au survol */
+}
+
+/* Titre du header */
+.header-title {
+  text-align: center;
+  margin: 10px 0 10px 0;
+  padding: 0 20px;
+  border-bottom: 2px solid #ccc;
+  border-top: 2px solid #ccc;
+}
+
+.header-title h1 {
+  font-size: 8rem;
+  font-weight: 700;
+  color: #000;
+  margin: 0;
+}
+
+/* Responsive pour mobile */
+@media (max-width: 768px) {
+  .header-top {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .header-nav {
+      flex-direction: column;
+      margin-top: 10px;
+  }
+
+  .header-nav a {
+      margin: 5px 0;
+  }
+
+  .header-button {
+      margin-top: 10px;
+  }
+
+  .header-title h1 {
+      font-size: 2.5em;
+  }
+}

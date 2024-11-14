@@ -1,0 +1,113 @@
+@import'../../../styles.scss';
+
+/* Conteneur global des thumbnails */
+.article-thumbnail {
+  background-color: #f0f0f0;  /* Fond gris clair */
+  border-radius: 8px;         /* Bords arrondis */
+  overflow: hidden;           /* Empêche les éléments de dépasser */
+  width: 100%;                /* Largeur par défaut */
+  max-width: 300px;           /* Limite la largeur à 350px */
+  margin: 15px;               /* Espacement entre les thumbnails */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Ombre légère */
+  display: inline-block;      /* Affichage en ligne pour plusieurs thumbnails */
+  vertical-align: top;        /* Aligner les thumbnails en haut */
+  transition: transform 0.3s ease; /* Transition lors du survol */
+}
+
+/* Effet de survol */
+.article-thumbnail:hover {
+  transform: scale(1.05); /* Légère augmentation de taille au survol */
+}
+
+/* Conteneur de l'image */
+.article-thumbnail_img-container {
+  position: relative;       /* Permet de positionner le span en bas à droite */
+  width: 100%;
+  height: 200px;            /* Hauteur fixe de l'image */
+  overflow: hidden;         /* Couper l'image qui dépasse */
+}
+
+/* Classe modifiée pour l'image */
+.article-thumbnail_img {
+  width: 100%;              /* L'image prend toute la largeur */
+  height: 100%;             /* L'image prend toute la hauteur */
+  object-fit: cover;        /* Couvre la zone de l'image sans déformation */
+}
+
+/* Catégorie : positionné en haut à droite de l'image */
+.article-thumbnail_category {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: $orange;  /* Orange pour ressortir */
+  color: #fff;                /* Texte blanc */
+  padding: 5px 10px;
+  font-weight: bold;
+  border-radius: 5px;
+  font-size: 0.9em;
+}
+
+/* Contenu du thumbnail */
+.article-thumbnail_content {
+  padding: 15px;
+  height: 200px;
+}
+
+/* Titre de l'article */
+.article-thumbnail_title {
+  font-weight: bold;
+  font-size: 0.7em;
+  color: #333;
+  text-decoration: none;      /* Enlever le souligné */
+  transition: color 0.3s;
+}
+
+.article-thumbnail_title:hover {
+  color: $orange;            /* Change la couleur au survol */
+}
+
+/* Extrait de l'article */
+.article-thumbnail_excerpt {
+  font-size: 0.6em;
+  color: #666;
+  line-height: 1.5;
+  margin-top: 10px;
+  font-style: italic;
+}
+
+.article-thumbnail_content_data{
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Date et nombre de likes sur la même ligne */
+.article-thumbnail_like-count,
+.article-thumbnail_date {
+  display: inline-block;
+  font-size: 0.8em;
+  color: #777;
+}
+
+.article-thumbnail_like-count span{
+  color: $orange;
+}
+
+/* article populaires*/
+.popular-article {
+  border: 1px $orange solid;
+}
+
+/*Class liste article vide*/
+.article-thumbnail_empty{
+  text-align: center;
+  font-weight: 900;
+}
+
+
+/* Responsivité pour mobile : un seul thumbnail par ligne */
+@media (max-width: 768px) {
+  .article-thumbnail {
+      max-width: 100%;      /* Prend toute la largeur sur mobile */
+      margin: 10px 0;       /* Moins d'espacement sur mobile */
+  }
+}

@@ -1,0 +1,93 @@
+<form (ngSubmit)="contactForm.valid && onSubmit() " #contactForm="ngForm"  class="contact-form">
+
+  <!-- Message d'erreurs du formulaire global -->
+  <div class="error_container">
+    Le formulaire est-il soumis ? {{contactForm.submitted}}
+  </div>
+  <div class="error_container">
+    Le formulaire est-il valide ? {{contactForm.valid}}
+  </div>
+  <div class="error_container">
+    Le formulaire est-il Invalide ? {{contactForm.invalid}}
+  </div>
+
+  <fieldset>
+    <label for="lastname">Nom</label>
+    <input type="text" id="lastname" name="lastname" required minlength="2" maxlength="15" [(ngModel)]="newMessage.lastname" #lastname="ngModel">
+  </fieldset>
+  @if(lastname.errors && contactForm.submitted){
+    <div class="error_container">
+      @if(lastname.errors['required']){
+        <span class="error-message">Le nom est requis</span>
+      }
+      @if(lastname.errors['minlength']){
+        <span class="error-message">La longueur minimale doit être supérieure à 2</span>
+      }
+      @if(lastname.errors['maxlength']){
+        <span class="error-message">La longueur minimale doit être supérieure à 2</span>
+      }
+    </div>
+
+  }
+
+
+  <fieldset>
+    <label for="firstname">Prénom</label>
+    <input type="text" id="firstname" name="firstname" required minlength="2" [(ngModel)]="newMessage.firstname" #firstname="ngModel">
+  </fieldset>
+  @if (firstname.errors && contactForm.submitted) {
+    <div class="error_container">
+      @if (firstname.errors['required']) {
+        <span class="error-message">Le prénom est requis</span>
+      }
+      @if (firstname.errors['minlength']) {
+        <span class="error-message">La longueur minimale doit être supérieure à 2</span>
+      }
+    </div>
+  }
+
+  <fieldset>
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required email [(ngModel)]="newMessage.email" #email="ngModel">
+  </fieldset>
+  @if (email.errors && contactForm.submitted) {
+    <div class="error_container">
+      @if (email.errors['required']) {
+        <span class="error-message">L'email est requis</span>
+      }
+      @if (email.errors['email']) {
+        <span class="error-message">Veuillez fournir une adresse email valide</span>
+      }
+    </div>
+  }
+
+  <fieldset>
+    <label for="content">Contenu du message</label>
+    <textarea name="content" id="content" required minlength="20" [(ngModel)]="newMessage.content" #content="ngModel"></textarea>
+  </fieldset>
+  @if (content.errors && contactForm.submitted) {
+    <div class="error_container">
+      @if (content.errors['required']) {
+        <span class="error-message">Le contenu du message est requis</span>
+      }
+      @if (content.errors['minlength']) {
+        <span class="error-message">Le contenu doit comporter au moins 20 caractères</span>
+      }
+    </div>
+  }
+
+  <div class="form-buttons_container">
+    <button type="submit" (click)="displayData()" [disabled]="contactForm.invalid">Envoyer</button>
+    <button type="reset">Restaurer</button>
+  </div>
+</form>
+
+@if(contactForm.valid && contactForm.submitted && canDisplayData){
+  <div class="data_container">
+    <h3>Vous avez rentré les données suivantes</h3>
+    <p>Votre nom : {{newMessage.lastname}}</p>
+    <p>Votre prénom : {{newMessage.firstname}}</p>
+    <p>Votre email : {{newMessage.email}}</p>
+    <p>Le contenu du message : {{newMessage.content}}</p>
+  </div>
+}

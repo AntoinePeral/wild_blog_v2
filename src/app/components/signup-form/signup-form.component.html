@@ -1,0 +1,129 @@
+<form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+  <div class="form_container">
+    <fieldset>
+      <label for="username">Nom d'utilisateur</label>
+      <input type="text" id="username" formControlName="username">
+    </fieldset>
+    @if(signUpForm.get('username')?.invalid && signUpForm.get('username')?.touched){
+      <div class="errors_container">
+        @if(signUpForm.get('username')?.errors?.['required']){
+          <span>Le nom de l'utilisateur est requis</span>
+        }
+        @if(signUpForm.get('username')?.errors?.['minlength']){
+          <span>Le nom doit comporter au moins 3 caractères.</span>
+        }
+      </div>
+    }
+  
+    <fieldset>
+      <label for="email">Email</label>
+      <input type="email" id="email" formControlName="email">
+    </fieldset>
+    @if(signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched &&  signUpForm.controls.email.errors){
+      <div class="errors_container">
+        @if(signUpForm.get('email')?.errors?.['required']){
+          <span>L'email est requis</span>
+        }
+        @if(signUpForm.get('email')?.errors?.['email']){
+          <span>Le format de l'email n'est pas correct.</span>
+        }
+        @if(signUpForm.controls.email.errors['extension'] && !signUpForm.controls.email.errors['email']  && !signUpForm.controls.email.errors['required'] ){
+          <span>L'email {{signUpForm.controls.email.errors['extension'].value}} 
+            doit se terminer par {{signUpForm.controls.email.errors['extension'].expected}}
+          </span>
+        }
+      </div>
+    }
+  
+    <div formGroupName="passwords">
+      <fieldset>
+        <label for="password">Mot de passe</label>
+        <input type="password" id="password" formControlName="password">
+      </fieldset>
+      @if(signUpForm.get('passwords.password')?.invalid && signUpForm.get('passwords.password')?.touched){
+        <div class="errors_container">
+          @if(signUpForm.get('passwords.password')?.errors?.['required']){
+            <span>Le mot de passe est requis. </span>
+          }
+          @if(signUpForm.get('passwords.password')?.errors?.['securePassword'] && !signUpForm.get('passwords.password')?.errors?.['required']){
+            <span>Le mot de passe doit contenir au moins 12 caractères, avec une majuscule, une minuscule, un chiffre, et un caractère spécial.</span>
+          }
+        </div>
+      }
+    
+      <fieldset>
+        <label for="confirmPassword">Confirmer le mot de passe</label>
+        <input type="password" id="confirmPassword" formControlName="confirmPassword" required>
+      </fieldset>
+      @if (signUpForm.get('passwords')?.invalid && signUpForm.controls.passwords.controls.confirmPassword.dirty) {
+        <div class="errors_container">
+            @if (signUpForm.controls.passwords.errors?.['passwordsMismatch'] && signUpForm.get('passwords')?.touched) {
+              <span>Les mots de passes ne correspondent pas</span>
+            }
+        </div>
+      }  
+    </div>
+  
+    <div formGroupName="address" class="form-group">
+      <label for="street">Rue </label>
+      <input type="text" id="street" name="street" formControlName="street">
+      @if (signUpForm.controls.address.controls.street.errors  && signUpForm.controls.address.controls.street.touched ) {
+        <div class="error-messages">
+          @if (signUpForm.get('address.street')?.errors?.['required']) {
+            <span>La rue doit être renseignée</span>
+          }
+          @if (signUpForm.controls.address.controls.street.errors['minlength']) {
+            <span>Le nombre de charactère doit être au moins de 3</span>
+          }
+        </div>
+      }
+      <label for="zipCode">code postal</label>
+      <input type="number" id="zipCode" name="zipCode" formControlName="zipCode">
+      <!-- @if (signUpForm.get('address.zipCode')?.errors && signUpForm.get('address.zipCode')?.touched) {
+        <div class="error-messages">
+          @if (signUpForm.get('address.zipCode')?.errors?.['required']) {
+            <span>Le code postal doit être renseigné</span>
+          }
+        </div>
+      } -->
+      <label for="city">Ville</label>
+      <input type="text" id="city" name="city" formControlName="city">
+      @if (signUpForm.get('address.city')?.errors && signUpForm.get('address.city')?.touched) {
+        <div class="error-messages">
+          @if (signUpForm.get('address.city')?.errors?.['required']) {
+            <span>La ville doit être renseignée</span>
+          }
+          @if (signUpForm.get('address.city')?.errors?.['minlength'] && signUpForm.get('address.city')?.dirty ) {
+            <span>Le nombre de charactère doit être au moins de 3</span>
+          }
+        </div>
+      }
+    </div>
+  
+    <div class="form-btn_container">
+      <button type="submit" [disabled]="signUpForm.invalid">S'inscrire</button>
+    </div>
+  </div>
+ 
+
+  <div class="emergency_container">
+    <div formArrayName="emergencyContacts">
+      <h2>A contacter en cas d'urgence</h2>
+      <button type="button" (click)="addEmergencyContact()" class="add-contact">+ Ajouter un contact</button>
+      @for (contact of contacts.controls; track $index) {
+        <div [formGroupName]="$index">
+          <label for="emergencyContactName-{{ $index }}">Nom :</label>
+          <input id="emergencyContactName-{{ $index }}" type="text" formControlName="name">
+          <label for="emergencyContactPhone-{{ $index }}">Téléphone :</label>
+          <input id="emergencyContactPhone-{{ $index }}" type="text" formControlName="phone">
+          <button type="button" (click)="removeEmergencyContact($index)" class="add-contact">Supprimer ce contact</button>
+         </div>
+       }
+     </div>
+  </div>
+
+
+
+
+
+</form>

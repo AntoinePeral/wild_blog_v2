@@ -1,0 +1,47 @@
+@import '../../../styles.scss';
+/* Container principal centré */
+.not-found_container {
+  display: flex;
+  justify-content: center;      /* Centrer horizontalement */
+  align-items: center;          /* Centrer verticalement */
+  height: 60vh;                /* Hauteur de la fenêtre */
+  background-color: #ffffff;   /* Fond clair */
+  text-align: center;           /* Centrer le texte */
+}
+
+/* Style du message d'erreur */
+.not-found-error {
+  font-size: 3em;               /* Taille du texte */
+  font-weight: bold;            /* Mettre en gras */
+  color: $orange;               /* Couleur rouge pour l'erreur */
+  text-transform: uppercase;    /* Mettre le texte en majuscule */
+  letter-spacing: 2px;          /* Espacement des lettres */
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* Ombre légère pour l'effet */
+  animation: fadeIn 1s ease-out; /* Animation pour faire apparaître le texte */
+}
+
+/* Animation de l'apparition du texte */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+.not-found-error {
+  font-family: 'Arial', sans-serif;  /* Police simple et moderne */
+
+}
+
+/* Responsivité - pour les petits écrans */
+@media (max-width: 768px) {
+  .not-found-error {
+    font-size: 2em;   /* Réduire la taille du texte sur mobile */
+  }
+}

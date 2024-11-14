@@ -1,0 +1,21 @@
+@import'../../../styles.scss';
+
+/*Class liste article vide*/
+.article-thumbnail_empty{
+  text-align: center;
+  font-weight: 900;
+}
+
+.main_container{
+  display: flex;
+  justify-content: center;  /* Centre horizontalement */
+  align-items: center;      /* Centre verticalement */
+  flex-wrap: wrap;         /* Pour centrer dans toute la hauteur de la fenêtre */
+}
+
+
+app-article-thumbnail{
+  width: 100%;
+  max-width: 300px;  /* Vous pouvez ajuster cette valeur selon vos besoins */
+  margin-right: 20px;
+}

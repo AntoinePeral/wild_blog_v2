@@ -1,0 +1,9 @@
+<div class="main_container">
+  @for(article of articlesList; track article.id){
+    @if(article.isPublished){
+      <app-article-thumbnail [article]="article"></app-article-thumbnail>
+    }
+  } @empty{
+    <p class="article-thumbnail_empty">Aucun article publié pour le moment</p>
+  }
+</div>
